@@ -6,7 +6,7 @@ const loading = <div>loading~</div>;
 
 const Page404 = React.lazy(() => import('./pages/Page404'));
 const Page500 = React.lazy(() => import('./pages/Page500'));
-const LoginPage = React.lazy(() => import('./pages/user/Login'));
+const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'));
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/404" element={<Page404 />} />
         <Route path="/500" element={<Page500 />} />
-        <Route path="/*" element={<LoginPage />} />
+        <Route path="/*" element={<DefaultLayout />} />
       </Routes>
     </BrowserRouter>
   );

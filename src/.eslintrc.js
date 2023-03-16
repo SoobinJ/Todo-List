@@ -19,6 +19,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'import/prefer-default-export': 0,
+    'arrow-body-style': 'off',
     'prettier/prettier': 0,
     'import/extensions': 0,
     'no-use-before-define': 0,
