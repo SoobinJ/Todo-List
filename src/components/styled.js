@@ -74,3 +74,13 @@ export const LayoutBtn = styled.div`
   border-radius: 50%;
   margin-right: 1.4rem;
 `;
+export const DefaultBtn = styled.div`
+  width: 11.6rem;
+  height: 5.6rem;
+  background: #ffd737;
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-align: center;
+  border-radius: 2rem;
+  line-height: 5.6rem;
+`;

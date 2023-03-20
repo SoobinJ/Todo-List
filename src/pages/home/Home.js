@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { LayoutBtn, LayoutBtnContainer } from '../../components/styled';
 import {
   CardContainer,
@@ -19,6 +20,7 @@ import PlusImg from '../../assets/home/img_plus.png';
 import Card from '../../components/home/Card';
 import Memo from '../../components/home/Memo';
 import { MemoLayout } from '../../components/home/MemoStyledComponents';
+import { miniMemoModalOnAction } from '../../store/actions/modal';
 
 function Home() {
   const [goal, setGoal] = useState('');
@@ -116,8 +118,12 @@ function Home() {
 export default Home;
 
 export function MemoPlus() {
+  const dispath = useDispatch();
+  const handleMemoModal = () => {
+    dispath(miniMemoModalOnAction());
+  };
   return (
-    <MemoLayout state="plus">
+    <MemoLayout state="plus" onClick={handleMemoModal}>
       <img src={PlusImg} alt="plus" />
     </MemoLayout>
   );
