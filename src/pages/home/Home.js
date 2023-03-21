@@ -20,10 +20,17 @@ import PlusImg from '../../assets/home/img_plus.png';
 import Card from '../../components/home/Card';
 import Memo from '../../components/home/Memo';
 import { MemoLayout } from '../../components/home/MemoStyledComponents';
-import { miniMemoModalOnAction } from '../../store/actions/modal';
+import {
+  miniMemoModalOnAction,
+  myPageModalOnAction,
+} from '../../store/actions/modal';
 
 function Home() {
   const [goal, setGoal] = useState('');
+  const dispath = useDispatch();
+  const handleMyPageModal = () => {
+    dispath(myPageModalOnAction());
+  };
   return (
     <HomeLayout>
       <LayoutLeft>
@@ -68,7 +75,13 @@ function Home() {
             <div id="date">2023.03.13</div>
           </DateFolder>
         </DateFolderContainer>
-        <img id="setting" src={SettingImg} alt="setting" />
+        <img
+          role="presentation"
+          id="setting"
+          src={SettingImg}
+          alt="setting"
+          onClick={handleMyPageModal}
+        />
       </LayoutLeft>
       <LayoutRight>
         <TopContainer>

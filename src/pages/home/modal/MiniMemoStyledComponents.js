@@ -1,18 +1,6 @@
 import styled from 'styled-components';
 import { DefaultBtn, LayoutBtnContainer } from '../../../components/styled';
 
-export const ModalBackground = styled.div`
-  z-index: 99;
-  width: 100vw;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: rgba(0, 0, 0, 0.73);
-`;
-
 export const ModalLayout = styled.div`
   position: fixed;
   top: 10%;

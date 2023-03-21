@@ -83,4 +83,16 @@ export const DefaultBtn = styled.div`
   text-align: center;
   border-radius: 2rem;
   line-height: 5.6rem;
+  cursor: pointer;
+`;
+export const ModalBackground = styled.div`
+  z-index: 99;
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.73);
 `;

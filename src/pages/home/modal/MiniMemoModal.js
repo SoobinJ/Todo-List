@@ -4,13 +4,10 @@ import {
   DefaultBtn,
   LayoutBtn,
   LayoutBtnContainer,
+  ModalBackground,
 } from '../../../components/styled';
 import { miniMemoModalOffAction } from '../../../store/actions/modal';
-import {
-  ContentContainer,
-  ModalBackground,
-  ModalLayout,
-} from './MiniMemoStyledComponents';
+import { ContentContainer, ModalLayout } from './MiniMemoStyledComponents';
 
 function MiniMemoModal() {
   const dispath = useDispatch();

@@ -14,4 +14,18 @@ export const miniMemoModalOffAction = () => {
   };
 };
 
+export const myPageModalOnAction = () => {
+  document.body.style.overflow = 'hidden';
+  return {
+    type: 'MYPAGE_ON',
+  };
+};
+
+export const myPageModalOffAction = () => {
+  document.body.style.overflow = 'unset';
+  return {
+    type: 'MYPAGE_OFF',
+  };
+};
+
 export default connect(miniMemoModalOnAction);
