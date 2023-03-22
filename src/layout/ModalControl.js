@@ -1,4 +1,5 @@
 import React from 'react';
+import DeadLineSettingModal from '../pages/home/modal/DeadLineSettingModal';
 import MiniMemoModal from '../pages/home/modal/MiniMemoModal';
 import MyPageModal from '../pages/myPage/MyPageModal';
 
@@ -7,6 +8,7 @@ function ModalControl() {
     <>
       <MiniMemoModal />
       <MyPageModal />
+      <DeadLineSettingModal />
     </>
   );
 }

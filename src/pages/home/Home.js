@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { LayoutBtn, LayoutBtnContainer } from '../../components/styled';
 import {
   CardContainer,
@@ -26,6 +27,7 @@ import {
 } from '../../store/actions/modal';
 
 function Home() {
+  const navigate = useNavigate();
   const [goal, setGoal] = useState('');
   const dispath = useDispatch();
   const handleMyPageModal = () => {
@@ -86,7 +88,15 @@ function Home() {
       <LayoutRight>
         <TopContainer>
           <div id="todayDate">2023.03.13</div>
-          <img id="todoPlus" src={PlusImg} alt="plus" />
+          <img
+            role="presentation"
+            id="todoPlus"
+            src={PlusImg}
+            alt="plus"
+            onClick={() => {
+              navigate('/add');
+            }}
+          />
         </TopContainer>
         <GoalInputContainer>
           <input

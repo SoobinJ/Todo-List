@@ -73,6 +73,7 @@ export const LayoutBtn = styled.div`
   background-color: ${(props) => props.bg};
   border-radius: 50%;
   margin-right: 1.4rem;
+  cursor: pointer;
 `;
 export const DefaultBtn = styled.div`
   width: 11.6rem;

@@ -28,4 +28,18 @@ export const myPageModalOffAction = () => {
   };
 };
 
+export const deadLineSettingOnAction = () => {
+  document.body.style.overflow = 'hidden';
+  return {
+    type: 'DEADLINESETTING_ON',
+  };
+};
+
+export const deadLineSettingOffAction = () => {
+  document.body.style.overflow = 'unset';
+  return {
+    type: 'DEADLINESETTING_OFF',
+  };
+};
+
 export default connect(miniMemoModalOnAction);
