@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment/moment';
 import {
   DefaultBtn,
   LayoutBtn,
@@ -35,7 +36,12 @@ function DeadLineSettingModal() {
             />
           </LayoutBtnContainer>
           <div id="title">마감 기한 설정</div>
-          <CustomCalendar onChange={setDeadLine} value={deadLine} />
+          <CustomCalendar
+            showNeighboringMonth={false}
+            formatDay={(locale, date) => moment(date).format('DD')}
+            onChange={setDeadLine}
+            value={deadLine}
+          />
           <DefaultBtn>등록하기</DefaultBtn>
         </ModalLayout>
       </ModalBackground>
