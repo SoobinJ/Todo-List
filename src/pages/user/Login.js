@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import errorImg from '../../assets/user/img_error.png';
+import { LayoutBtn, LayoutBtnContainer } from '../../components/styled';
 import {
   ErrorMessageBox,
   InputContainer,
   LoginBtn,
   Title,
-} from './LoginStyledComponents';
-import errorImg from '../../assets/login/img_error.png';
-import { LayoutBtn, LayoutBtnContainer } from '../../components/styled';
+  UserNavigateTextContainer,
+} from './UserStyledComponents';
 
 function Login() {
   const navigate = useNavigate();
@@ -60,6 +61,11 @@ function Login() {
           LOGIN
         </LoginBtn>
         <LoginBtn bg="#F9E000">KAKAO LOGIN</LoginBtn>
+        <UserNavigateTextContainer>
+          <span>🥳</span>&nbsp;&nbsp;아직 가입하지 않았다면&nbsp;&nbsp;
+          <a href="/signup">회원가입</a>
+          &nbsp;&nbsp; 하러가기!
+        </UserNavigateTextContainer>
       </InputContainer>
     </>
   );
