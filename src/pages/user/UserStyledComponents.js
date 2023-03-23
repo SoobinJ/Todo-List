@@ -89,7 +89,7 @@ export const UserNavigateTextContainer = styled.div`
 `;
 
 export const ErrorMessageBox = styled.div`
-  display: ${(props) => (props.isError ? 'flex' : 'none')};
+  display: ${(props) => (props.isError ? 'flex' : 'none') || 'flex'};
   width: ${(props) => props.width || '41.7rem'};
   height: 2.5rem;
   border: 2px solid #e1512e;

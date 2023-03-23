@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { LayoutBtn, LayoutBtnContainer } from '../../components/styled';
 import {
@@ -23,10 +23,21 @@ const signIn = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [verifyCode, setVerifyCode] = useState('');
-  const [isError] = useState(false);
-  const [step, setStep] = useState(1);
+  // 비밀번호 규칙 알차 여부
+  const [isValidError, setIsValidError] = useState(false);
+  // 확인 비밀번호 일치 여부
+  const [isConfirmError, setIsConfirmError] = useState(false);
+  // 아이디, 비밀번호 관련 에러 통합
+  const [isPwError, setIsPwError] = useState(false);
+  // 인증요청 버튼 활성화 여부
+  const [isValidRequest, setIsValidRequest] = useState(false);
+  // 요청 보냈는지 여부
   const [isResponse, setIsResponse] = useState(false);
+  // 인증번호 에러 메세지 여부
+  const [isValidVerifyCodeError, setIsValidVerifyCodeError] = useState(false);
+  // 최종 인증여부
   const [isVerify, setIsVerify] = useState(false);
+  const [step, setStep] = useState(1);
   const navigate = useNavigate();
   // 휴대폰번호 숫자만 입력 + 자동 하이픈
   const handlePhonePress = (value) => {
@@ -60,6 +71,47 @@ const signIn = () => {
     tmp += str.substr(7);
     return setPhone(tmp);
   };
+  const isValidPassword = (password) => {
+    return (
+      password.match(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[{}[\]()/?.,;:|~`!@#$%^&*\-_+<>\\='"])[A-Za-z\d{}[\]()/?.,;:|~`!@#$%^&*\-_+<>\\='"]{8,}$/,
+      ) !== null
+    );
+  };
+  // 비밀번호 오류 검사
+  const handleIDPW = () => {
+    if (pw !== confirmPw) {
+      setIsConfirmError(true);
+      setIsValidError(false);
+      return;
+    }
+    if (!isValidPassword(pw)) {
+      setIsValidError(true);
+      setIsConfirmError(false);
+      return;
+    }
+    setIsConfirmError(false);
+    setIsValidError(false);
+    setStep(2);
+  };
+
+  // 인증요청 버튼 활성화 관리
+  useEffect(() => {
+    if (name.length >= 2 && phone.length >= 13) {
+      setIsValidRequest(true);
+    } else {
+      setIsValidRequest(false);
+    }
+  }, [name, phone]);
+
+  // 비밀번호 관련 에러 모두 관리
+  useEffect(() => {
+    if (isValidError || isConfirmError) {
+      setIsPwError(true);
+    } else {
+      setIsPwError(false);
+    }
+  }, [isValidError, isConfirmError]);
 
   return (
     <>
@@ -138,11 +190,11 @@ const signIn = () => {
             />
             <LoginBtn
               width="20%"
-              bg={name && phone ? '#FFD737' : '#ccc'}
+              bg={isValidRequest ? '#FFD737' : '#ccc'}
               style={{
                 fontSize: '1.8rem',
               }}
-              isClick={name && phone}
+              isClick={isValidRequest}
               onClick={() => {
                 setIsResponse(true);
               }}
@@ -166,13 +218,19 @@ const signIn = () => {
             />
             <LoginBtn
               width="20%"
-              bg={verifyCode !== '' ? '#FFD737' : '#ccc'}
+              bg={verifyCode.length >= 4 ? '#FFD737' : '#ccc'}
               style={{
                 fontSize: '1.8rem',
               }}
-              isClick={verifyCode !== ''}
+              isClick={verifyCode.length >= 4}
               onClick={() => {
-                setIsVerify(true);
+                if (verifyCode === '1234') {
+                  setIsValidVerifyCodeError(false);
+                  setIsVerify(true);
+                } else {
+                  setIsValidVerifyCodeError(true);
+                  setIsVerify(false);
+                }
               }}
             >
               인증확인
@@ -214,29 +272,31 @@ const signIn = () => {
           )}
         </InputContainer>
       )}
-
       <ErrorMessageBox
-        isError={isError}
+        isError={isPwError}
         width="46.9rem"
         style={{
           marginBottom: '1.9rem',
-          marginTop: '11.4rem',
+          marginTop: '10rem',
         }}
       >
         <img src={errorImg} alt="error" />
-        <div>영문, 숫자, 특수문자를 포함한 8자 이상을 입력해주세요!</div>
-        {/* 확인 비밀번호가 맞지 않는 경우 추가 예정 , 상황에 맞게 메세지 변경 */}
+        {isValidError ? (
+          <div>영문, 숫자, 특수문자를 포함한 8자 이상을 입력해주세요!</div>
+        ) : (
+          <div>비밀번호가 일치하지 않습니다. 다시 확인해주세요!</div>
+        )}
       </ErrorMessageBox>
 
       {step === 1 ? (
         <LoginBtn
-          marginTop={isError ? '0' : '15rem'}
+          marginTop={isPwError ? '0' : '15rem'}
           marginBottom="1.4rem"
           width="46.9rem"
           bg={id && pw && confirmPw ? '#FFD737' : '#ccc'}
-          isClick={id && pw && confirmPw && !isError}
+          isClick={id && pw && confirmPw}
           onClick={() => {
-            setStep(2);
+            handleIDPW();
           }}
         >
           다음
@@ -244,24 +304,35 @@ const signIn = () => {
       ) : (
         <SignUpBtnContainer
           marginTop={
-            isError
-              ? '0'
-              : isResponse
-              ? isVerify
+            isResponse
+              ? isValidVerifyCodeError || isVerify
                 ? '11rem'
                 : '15rem'
               : '25rem'
           }
         >
-          <VerifyMessageBox isVerify={isVerify}>
-            인증이&nbsp;<span>완료</span>&nbsp;되었습니다! 가입을 마무리해주세요
-            😃
-          </VerifyMessageBox>
+          {isVerify ? (
+            <VerifyMessageBox isVerify={isVerify}>
+              인증이&nbsp;<span>완료</span>&nbsp;되었습니다! 가입을
+              마무리해주세요 😃
+            </VerifyMessageBox>
+          ) : (
+            <ErrorMessageBox
+              isError={isValidVerifyCodeError}
+              width="46.9rem"
+              style={{
+                marginBottom: '1.9rem',
+              }}
+            >
+              <img src={errorImg} alt="error" />
+              <div>인증번호가 옳지 않습니다. 다시한번 확인해주세요!</div>
+            </ErrorMessageBox>
+          )}
           <LoginBtn
             marginBottom="1.4rem"
             width="46.9rem"
-            bg={name && phone && verifyCode ? '#FFD737' : '#ccc'}
-            isClick={name && phone && verifyCode && !isError}
+            bg={isVerify ? '#FFD737' : '#ccc'}
+            isClick={isVerify}
             onClick={() => {
               navigate('/home');
             }}
