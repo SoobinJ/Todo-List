@@ -24,7 +24,7 @@ const signIn = () => {
   const [phone, setPhone] = useState('');
   const [verifyCode, setVerifyCode] = useState('');
   const [isError] = useState(false);
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [isResponse, setIsResponse] = useState(false);
   const [isVerify, setIsVerify] = useState(false);
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const signIn = () => {
       <Title>ToDo List</Title>
       <SignUpIntroTextBox>ToDo List에 가입해주세요!</SignUpIntroTextBox>
       {step === 1 ? (
-        <InputContainer width="38.8rem" marginTop="6.5rem">
+        <InputContainer width="46.9rem" marginTop="6.5rem">
           <input
             type="text"
             maxLength={30}
@@ -230,7 +230,7 @@ const signIn = () => {
 
       {step === 1 ? (
         <LoginBtn
-          marginTop={isError ? '0' : '16.3rem'}
+          marginTop={isError ? '0' : '15rem'}
           marginBottom="1.4rem"
           width="46.9rem"
           bg={id && pw && confirmPw ? '#FFD737' : '#ccc'}
