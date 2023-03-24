@@ -19,6 +19,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'import/prefer-default-export': 0,
+    // 중첩삼항연산자
     'no-nested-ternary': 'off',
     'arrow-body-style': 'off',
     'prettier/prettier': 0,

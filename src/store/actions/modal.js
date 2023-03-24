@@ -42,4 +42,18 @@ export const deadLineSettingOffAction = () => {
   };
 };
 
+export const detailToDoModalOnAction = () => {
+  document.body.style.overflow = 'hidden';
+  return {
+    type: 'DETAILTODO_ON',
+  };
+};
+
+export const detailTodoModalOffAction = () => {
+  document.body.style.overflow = 'unset';
+  return {
+    type: 'DETAILTODO_OFF',
+  };
+};
+
 export default connect(miniMemoModalOnAction);
