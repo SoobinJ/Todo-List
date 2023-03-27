@@ -6,7 +6,10 @@ import {
   LayoutBtnContainer,
   ModalBackground,
 } from '../../components/styled';
-import { myPageModalOffAction } from '../../store/actions/modal';
+import {
+  completeModalOnAction,
+  myPageModalOffAction,
+} from '../../store/actions/modal';
 import {
   BottomContainer,
   ContentBox,
@@ -26,6 +29,10 @@ function MyPageModal() {
   const handleMyPageModal = () => {
     dispath(myPageModalOffAction());
   };
+  const handleCompleteModal = () => {
+    handleMyPageModal();
+    dispath(completeModalOnAction());
+  };
   const [userName, setUserName] = useState('전수빈');
   const [deadLine, setDeadLine] = useState(3);
   return (
@@ -37,7 +44,7 @@ function MyPageModal() {
           </LayoutBtnContainer>
           <TopContainer>
             <div id="userName">전수빈님!</div>
-            <DefaultBtn>수정완료</DefaultBtn>
+            <DefaultBtn onClick={handleCompleteModal}>수정완료</DefaultBtn>
           </TopContainer>
           <ContentBox>
             <UserSettingContainer>

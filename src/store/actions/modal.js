@@ -56,4 +56,18 @@ export const detailTodoModalOffAction = () => {
   };
 };
 
+export const completeModalOnAction = () => {
+  document.body.style.overflow = 'hidden';
+  return {
+    type: 'COMPLETE_ON',
+  };
+};
+
+export const completeModalOffAction = () => {
+  document.body.style.overflow = 'unset';
+  return {
+    type: 'COMPLETE_OFF',
+  };
+};
+
 export default connect(miniMemoModalOnAction);

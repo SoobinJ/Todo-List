@@ -7,7 +7,10 @@ import {
   LayoutBtnContainer,
   ModalBackground,
 } from '../../../components/styled';
-import { deadLineSettingOffAction } from '../../../store/actions/modal';
+import {
+  completeModalOnAction,
+  deadLineSettingOffAction,
+} from '../../../store/actions/modal';
 import {
   CustomCalendar,
   ModalLayout,
@@ -23,6 +26,11 @@ function DeadLineSettingModal() {
 
   const handleDeadLineSettingModal = () => {
     dispath(deadLineSettingOffAction());
+  };
+
+  const handleCompleteModal = () => {
+    dispath(deadLineSettingOffAction());
+    dispath(completeModalOnAction());
   };
   return (
     modalState && (
@@ -42,7 +50,7 @@ function DeadLineSettingModal() {
             onChange={setDeadLine}
             value={deadLine}
           />
-          <DefaultBtn>등록하기</DefaultBtn>
+          <DefaultBtn onClick={handleCompleteModal}>등록하기</DefaultBtn>
         </ModalLayout>
       </ModalBackground>
     )

@@ -6,7 +6,10 @@ import {
   LayoutBtnContainer,
   ModalBackground,
 } from '../../../components/styled';
-import { detailTodoModalOffAction } from '../../../store/actions/modal';
+import {
+  deadLineSettingOnAction,
+  detailTodoModalOffAction,
+} from '../../../store/actions/modal';
 import {
   ContentContainer,
   ContentInputContainer,
@@ -24,6 +27,10 @@ function DetailToDo() {
   );
   const handleDetailModal = () => {
     dispath(detailTodoModalOffAction());
+  };
+  const handleDeadLineSettingModal = () => {
+    handleDetailModal();
+    dispath(deadLineSettingOnAction());
   };
   return (
     modalState && (
@@ -52,7 +59,9 @@ function DetailToDo() {
                 onChange={(e) => setContent(e.target.value)}
               />
             </ContentInputContainer>
-            <DefaultBtn>수정완료</DefaultBtn>
+            <DefaultBtn onClick={handleDeadLineSettingModal}>
+              수정완료
+            </DefaultBtn>
           </ContentContainer>
         </ModalLayout>
       </ModalBackground>

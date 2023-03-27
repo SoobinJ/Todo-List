@@ -3,6 +3,7 @@ const initialState = {
   MyPageModal: false,
   DeadLineSettingModal: false,
   DetailTodoModal: false,
+  CompleteModal: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -31,6 +32,12 @@ const ModalReducer = (state = initialState, action) => {
     }
     case 'DETAILTODO_OFF': {
       return { ...state, DetailTodoModal: false };
+    }
+    case 'COMPLETE_ON': {
+      return { ...state, CompleteModal: true };
+    }
+    case 'COMPLETE_OFF': {
+      return { ...state, CompleteModal: false };
     }
     default:
       return state;
