@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { LayoutBtn, LayoutBtnContainer } from '../../components/styled';
 import {
   CardContainer,
@@ -33,6 +34,74 @@ function Home() {
   const handleMyPageModal = () => {
     dispath(myPageModalOnAction());
   };
+
+  // 임시 데이터
+  const [items, setItems] = useState({
+    ready: [
+      {
+        id: '1',
+        title: 'Title1',
+      },
+      {
+        id: '2',
+        title: 'Title2',
+      },
+      {
+        id: '3',
+        title: 'Title3',
+      },
+    ],
+    proceeding: [
+      {
+        id: '4',
+        title: 'Title4',
+      },
+      {
+        id: '5',
+        title: 'Title5',
+      },
+    ],
+    complete: [
+      {
+        id: '6',
+        title: 'Title6',
+      },
+      {
+        id: '7',
+        title: 'Title7',
+      },
+      {
+        id: '8',
+        title: 'Title8',
+      },
+    ],
+  });
+
+  const onDragEnd = ({ source, destination }) => {
+    if (!destination) return;
+
+    const scourceKey = source.droppableId;
+    const destinationKey = destination.droppableId;
+
+    const nitems = JSON.parse(JSON.stringify(items));
+    const [targetItem] = nitems[scourceKey].splice(source.index, 1);
+    nitems[destinationKey].splice(destination.index, 0, targetItem);
+    setItems(nitems);
+  };
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const animation = requestAnimationFrame(() => setEnabled(true));
+
+    return () => {
+      cancelAnimationFrame(animation);
+      setEnabled(false);
+    };
+  }, []);
+
+  if (!enabled) {
+    return null;
+  }
   return (
     <HomeLayout>
       <LayoutLeft>
@@ -109,24 +178,60 @@ function Home() {
           />
           <hr />
         </GoalInputContainer>
-        <CardContainer>
-          <CardSection id="ready" color="#FF6057">
-            <div className="cardSectionTitle">미진행</div>
-            <Card state="ready" />
-            <Card state="ready" />
-            <Card state="ready" />
-            <Card state="ready" />
-          </CardSection>
-          <CardSection id="proceeding" color="#FFBB2E">
-            <div className="cardSectionTitle">진행중</div>
-            <Card state="proceeding" />
-            <Card state="proceeding" />
-          </CardSection>
-          <CardSection id="complete" color="#28C840">
-            <div className="cardSectionTitle">완료</div>
-            <Card state="complete" />
-          </CardSection>
-        </CardContainer>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <CardContainer>
+            {Object.keys(items).map((key) => (
+              <Droppable key={key} droppableId={key}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    // eslint-disable-next-line react/jsx-props-no-spreading
+                    {...provided.droppableProps}
+                  >
+                    <CardSection
+                      id={key}
+                      color={
+                        key === 'ready'
+                          ? '#FF6057'
+                          : key === 'proceeding'
+                          ? '#FFBB2E'
+                          : '#28C840'
+                      }
+                    >
+                      <div className="cardSectionTitle">
+                        {key === 'ready'
+                          ? '미진행'
+                          : key === 'proceeding'
+                          ? '진행중'
+                          : '완료'}
+                      </div>
+                      {items[key].map((item, index) => (
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              // eslint-disable-next-line react/jsx-props-no-spreading
+                              {...provided.draggableProps}
+                              // eslint-disable-next-line react/jsx-props-no-spreading
+                              {...provided.dragHandleProps}
+                            >
+                              <Card state={key} title={item.title} />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                    </CardSection>
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            ))}
+          </CardContainer>
+        </DragDropContext>
         <MemoContainer>
           <Memo />
           <Memo />

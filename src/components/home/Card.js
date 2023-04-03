@@ -17,7 +17,7 @@ function Card(props) {
     <CardLayout onClick={handleDetailToDoModal}>
       <ProceedingState cardState={cardState.state} />
       <CardContent>
-        <div id="cardTitle">정책분석평가 과제 제출</div>
+        <div id="cardTitle">{cardState.title}</div>
         <div id="cardDeadline">12/12 마감</div>
         <div id="cardContent">정책분석평가 과제는 어쩌구 저쩌구!</div>
       </CardContent>

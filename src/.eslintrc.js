@@ -21,6 +21,8 @@ module.exports = {
     'import/prefer-default-export': 0,
     // 중첩삼항연산자
     'no-nested-ternary': 'off',
+    // 배열 구조분해 할당
+    'prefer-destructuring': 0,
     'arrow-body-style': 'off',
     'prettier/prettier': 0,
     'import/extensions': 0,
