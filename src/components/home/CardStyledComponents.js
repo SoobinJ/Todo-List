@@ -2,15 +2,16 @@ import styled from 'styled-components';
 
 export const CardLayout = styled.div`
   cursor: pointer;
-  width: 24.9rem;
+  width: 24rem;
   height: 9.4rem;
   border: 1px solid #bdbdbd;
   border-radius: 1.2rem;
   display: flex;
   background: #fff;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
   margin-bottom: 1.8rem;
 `;
+
 export const ProceedingState = styled.div`
   width: 1.8rem;
   height: 1.8rem;

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
 import { LayoutBtn, LayoutBtnContainer } from '../../components/styled';
 import {
   CardContainer,
@@ -88,8 +92,16 @@ function Home() {
     nitems[destinationKey].splice(destination.index, 0, targetItem);
     setItems(nitems);
   };
+
   const [enabled, setEnabled] = useState(false);
 
+  const setting = {
+    dots: true,
+    infinite: true,
+    slideToShow: 1,
+    slideToScroll: 1,
+    draggable: true,
+  };
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
@@ -111,10 +123,17 @@ function Home() {
           <LayoutBtn bg="#28C840" />
         </LayoutBtnContainer>
         <div id="userName">전수빈님</div>
-        <DeadLineAlarm>
-          <div id="deadlineTitle">마감 1일전!!</div>
-          <div id="deadlineContent">정책분석 평가 과제 제출</div>
-        </DeadLineAlarm>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <Slider {...setting}>
+          <DeadLineAlarm>
+            <div id="deadlineTitle">마감 1일전!!</div>
+            <div id="deadlineContent">정책분석 평가 과제 제출</div>
+          </DeadLineAlarm>
+          <DeadLineAlarm>
+            <div id="deadlineTitle">마감 1일전!!</div>
+            <div id="deadlineContent">정책분석 평가 과제 제출</div>
+          </DeadLineAlarm>
+        </Slider>
         {/* map으로 돌리기 */}
         <DateFolderContainer>
           <DateFolder>
@@ -205,25 +224,32 @@ function Home() {
                           ? '진행중'
                           : '완료'}
                       </div>
-                      {items[key].map((item, index) => (
-                        <Draggable
-                          key={item.id}
-                          draggableId={item.id}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <div
-                              ref={provided.innerRef}
-                              // eslint-disable-next-line react/jsx-props-no-spreading
-                              {...provided.draggableProps}
-                              // eslint-disable-next-line react/jsx-props-no-spreading
-                              {...provided.dragHandleProps}
-                            >
-                              <Card state={key} title={item.title} />
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
+                      <div
+                        style={{
+                          height: '47rem',
+                          overflowY: 'scroll',
+                        }}
+                      >
+                        {items[key].map((item, index) => (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                // eslint-disable-next-line react/jsx-props-no-spreading
+                                {...provided.draggableProps}
+                                // eslint-disable-next-line react/jsx-props-no-spreading
+                                {...provided.dragHandleProps}
+                              >
+                                <Card state={key} title={item.title} />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                      </div>
                     </CardSection>
                     {provided.placeholder}
                   </div>

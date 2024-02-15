@@ -21,7 +21,7 @@ export const LayoutLeft = styled.div`
   #setting {
     width: 3.5rem;
     margin-left: 3.5rem;
-    margin-top: 11rem;
+    margin-top: 7rem;
     cursor: pointer;
   }
 `;
@@ -46,7 +46,7 @@ export const DeadLineAlarm = styled.div`
 export const DateFolderContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 3.7rem;
+  margin-top: 6.7rem;
   margin-left: 3.5rem;
   height: 42rem;
 `;
@@ -114,6 +114,7 @@ export const GoalInputContainer = styled.div`
 `;
 export const CardContainer = styled.div`
   display: flex;
+  height: 50rem;
   margin-left: 3.8rem;
   margin-right: 5.9rem;
   justify-content: space-between;
