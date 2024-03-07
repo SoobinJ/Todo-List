@@ -123,7 +123,7 @@ const signIn = () => {
       <Title>ToDo List</Title>
       <SignUpIntroTextBox>ToDo List에 가입해주세요!</SignUpIntroTextBox>
       {step === 1 ? (
-        <InputContainer width="46.9rem" marginTop="6.5rem">
+        <InputContainer marginTop="6.5rem">
           <input
             type="text"
             maxLength={30}
@@ -163,7 +163,7 @@ const signIn = () => {
           </SignUpIntroTextBox>
         </InputContainer>
       ) : (
-        <InputContainer width="46.9rem" marginTop="6.5rem">
+        <InputContainer>
           <input
             type="text"
             maxLength={30}
@@ -289,18 +289,18 @@ const signIn = () => {
       </ErrorMessageBox>
 
       {step === 1 ? (
-        <LoginBtn
-          marginTop={isPwError ? '0' : '15rem'}
-          marginBottom="1.4rem"
-          width="46.9rem"
-          bg={id && pw && confirmPw ? '#FFD737' : '#ccc'}
-          isClick={id && pw && confirmPw}
-          onClick={() => {
-            handleIDPW();
-          }}
-        >
-          다음
-        </LoginBtn>
+        <InputContainer marginBottom="1.4rem">
+          <LoginBtn
+            marginTop={isPwError ? '0' : '15rem'}
+            bg="#FFD737"
+            disabled={!(id && pw && confirmPw)}
+            onClick={() => {
+              handleIDPW();
+            }}
+          >
+            다음
+          </LoginBtn>
+        </InputContainer>
       ) : (
         <SignUpBtnContainer
           marginTop={

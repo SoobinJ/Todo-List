@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { completeModalOffAction } from '../../store/actions/modal';
-import { LayoutBtn, LayoutBtnContainer, ModalBackground } from '../styled';
+import { LayoutBtnContainer, LayoutBtn, ModalBackground } from '../styled';
 
 function CompleteModal() {
   const dispath = useDispatch();

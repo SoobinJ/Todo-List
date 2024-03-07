@@ -15,7 +15,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: ${(props) => props.marginTop};
-  width: ${(props) => props.width || '41.7rem'};
+  width: 46.9rem;
   input {
     background-image: url(${loginId});
     background-position: 2rem center;
@@ -55,7 +55,7 @@ export const InputContainer = styled.div`
   }
 `;
 export const LoginBtn = styled.button`
-  width: ${(props) => props.width || '41.7rem'};
+  width: 100%;
   margin-top: ${(props) => props.marginTop};
   height: 7.5rem;
   border-radius: 1.2rem;
