@@ -334,7 +334,7 @@ const signIn = () => {
             bg="#FFD737"
             disabled={!isVerify}
             onClick={() => {
-              navigate('/home');
+              navigate('/');
             }}
           >
             ToDo List와 함께하기

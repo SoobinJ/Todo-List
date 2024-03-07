@@ -36,7 +36,7 @@ function AddToDo() {
   }, [title, content]);
 
   const handleHome = () => {
-    navigate('/home');
+    navigate('/');
   };
   const handleDeadLineSettingModal = () => {
     dispath(deadLineSettingOnAction());

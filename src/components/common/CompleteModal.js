@@ -11,7 +11,7 @@ function CompleteModal() {
   const modalState = useSelector((state) => state.ModalReducer.CompleteModal);
   const handleCompleteModal = () => {
     dispath(completeModalOffAction());
-    navigate('/home');
+    navigate('/');
   };
   return (
     modalState && (

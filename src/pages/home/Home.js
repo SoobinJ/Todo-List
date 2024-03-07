@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-
+import moment from 'moment';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -135,9 +135,25 @@ const MEMO_ITEM = [
   },
 ];
 
+const DEADLINE_ALARM = [
+  {
+    id: 1,
+    title: '알림1',
+    content: '알림1 내용',
+  },
+  {
+    id: 2,
+    title: '알림2',
+    content: '알림2 내용',
+  },
+];
+
 function Home() {
   const navigate = useNavigate();
   const [goal, setGoal] = useState('');
+  const [selectedDate, setSelectedDate] = useState(
+    moment().format('YYYY.MM.DD'),
+  );
   const dispath = useDispatch();
   const handleMyPageModal = () => {
     dispath(myPageModalOnAction());
@@ -159,6 +175,10 @@ function Home() {
   };
 
   const [enabled, setEnabled] = useState(false);
+
+  const handleDate = (date) => {
+    setSelectedDate(date);
+  };
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
@@ -184,20 +204,20 @@ function Home() {
         <div id="userName">전수빈님</div>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Slider {...SLIDER_SETTING}>
-          <DeadLineAlarm>
-            <div id="deadlineTitle">마감 1일전!!</div>
-            <div id="deadlineContent">정책분석 평가 과제 제출</div>
-          </DeadLineAlarm>
-          <DeadLineAlarm>
-            <div id="deadlineTitle">마감 1일전!!</div>
-            <div id="deadlineContent">정책분석 평가 과제 제출</div>
-          </DeadLineAlarm>
+          {DEADLINE_ALARM.map((item) => {
+            return (
+              <DeadLineAlarm key={item.id}>
+                <div id="deadlineTitle">{item.title}</div>
+                <div id="deadlineContent">{item.content}</div>
+              </DeadLineAlarm>
+            );
+          })}
         </Slider>
         {/* map으로 돌리기 */}
         <DateFolderContainer>
           {DATE_FOLER_ITEM.map((item) => {
             return (
-              <DateFolder key={item.id}>
+              <DateFolder key={item.id} onClick={() => handleDate(item.date)}>
                 <img src={FolderImg} alt="folder" />
                 <div id="date">{item.date}</div>
               </DateFolder>
@@ -214,7 +234,7 @@ function Home() {
       </LayoutLeft>
       <LayoutRight>
         <TopContainer>
-          <div id="todayDate">2023.03.13</div>
+          <div id="todayDate">{selectedDate}</div>
           <img
             role="presentation"
             id="todoPlus"
