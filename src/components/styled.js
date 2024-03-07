@@ -48,6 +48,11 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
         overflow-x: hidden;
     }
+
+    button{
+      border: none;
+      outline: none;
+    }
 `;
 
 export const Layout = styled.div`

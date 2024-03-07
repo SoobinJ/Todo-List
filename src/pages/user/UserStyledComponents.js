@@ -54,9 +54,7 @@ export const InputContainer = styled.div`
     border: 2px solid #ffbb2e;
   }
 `;
-export const LoginBtn = styled.div`
-  pointer-events: ${(props) => (props.isClick ? 'auto' : 'none' || 'none')};
-  cursor: ${(props) => (props.isClick ? 'pointer' : 'Default' || 'Default')};
+export const LoginBtn = styled.button`
   width: ${(props) => props.width || '41.7rem'};
   margin-top: ${(props) => props.marginTop};
   height: 7.5rem;
@@ -68,6 +66,10 @@ export const LoginBtn = styled.div`
   line-height: 7.2rem;
   text-align: center;
   color: #fff;
+
+  &:disabled {
+    background-color: #ccc;
+  }
 `;
 export const UserNavigateTextContainer = styled.div`
   text-align: center;

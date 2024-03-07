@@ -331,8 +331,8 @@ const signIn = () => {
           <LoginBtn
             marginBottom="1.4rem"
             width="46.9rem"
-            bg={isVerify ? '#FFD737' : '#ccc'}
-            isClick={isVerify}
+            bg="#FFD737"
+            disabled={!isVerify}
             onClick={() => {
               navigate('/home');
             }}
@@ -343,7 +343,7 @@ const signIn = () => {
       )}
       <UserNavigateTextContainer>
         <span>🥳</span>&nbsp;&nbsp;이미 계정이 있다면&nbsp;&nbsp;
-        <a href="/">로그인</a>
+        <a href="/signin">로그인</a>
         &nbsp;&nbsp;하러가기!
       </UserNavigateTextContainer>
     </>

@@ -14,7 +14,16 @@ function Login() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
-  const [isError] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleLogin = () => {
+    if (!(id === 'test@test.com' && pw === 'test1234!')) {
+      setIsError(true);
+      return;
+    }
+
+    navigate('/');
+  };
 
   return (
     <>
@@ -51,13 +60,7 @@ function Login() {
         <div>아이디/비밀번호를 확인해주세요</div>
       </ErrorMessageBox>
       <InputContainer marginTop={isError ? '5.1rem' : '7.3rem'}>
-        <LoginBtn
-          bg={id && pw ? '#28C840' : '#ccc'}
-          isClick={id && pw && !isError}
-          onClick={() => {
-            navigate('/home');
-          }}
-        >
+        <LoginBtn bg="#28C840" disabled={!(id && pw)} onClick={handleLogin}>
           LOGIN
         </LoginBtn>
         <LoginBtn bg="#F9E000">KAKAO LOGIN</LoginBtn>
