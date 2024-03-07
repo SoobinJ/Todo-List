@@ -70,12 +70,13 @@ export const LayoutRight = styled.div`
   display: flex;
   width: 75.3%;
   flex-direction: column;
+  padding: 0 3.7rem;
+  box-sizing: border-box;
 `;
 export const TopContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 3.9rem;
-  margin-left: 3.5rem;
   justify-content: space-between;
   #todayDate {
     font-weight: 700;
@@ -83,7 +84,6 @@ export const TopContainer = styled.div`
   }
   #todoPlus {
     width: 2rem;
-    margin-right: 6rem;
     cursor: pointer;
   }
 `;
@@ -95,7 +95,6 @@ export const GoalInputContainer = styled.div`
     border: none;
     height: 3rem;
     width: 53.5rem;
-    margin-left: 3.7rem;
     font-weight: 500;
     font-size: 2rem;
   }
@@ -107,7 +106,7 @@ export const GoalInputContainer = styled.div`
   }
   hr {
     width: 53.5rem;
-    margin-left: 3.7rem;
+    margin: 0;
     border: 1px solid #ccc;
     border-bottom: 0;
   }
@@ -115,8 +114,6 @@ export const GoalInputContainer = styled.div`
 export const CardContainer = styled.div`
   display: flex;
   height: 50rem;
-  margin-left: 3.8rem;
-  margin-right: 5.9rem;
   justify-content: space-between;
   .cardState {
     width: 25rem;
@@ -137,8 +134,9 @@ export const CardSection = styled.div`
 `;
 export const MemoContainer = styled.div`
   display: flex;
+  width: 100%;
   margin-top: 3.9rem;
-  margin-left: 3.8rem;
-  margin-right: 5.9rem;
-  justify-content: space-between;
+  gap: 3rem;
+  overflow: auto;
+  white-space: nowrap;
 `;

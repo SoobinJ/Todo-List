@@ -31,6 +31,110 @@ import {
   myPageModalOnAction,
 } from '../../store/actions/modal';
 
+const SLIDER_SETTING = {
+  dots: true,
+  infinite: true,
+  slideToShow: 1,
+  slideToScroll: 1,
+  draggable: true,
+};
+
+const CARD_ITEM = {
+  ready: [
+    {
+      id: '1',
+      title: 'Title1',
+    },
+    {
+      id: '2',
+      title: 'Title2',
+    },
+    {
+      id: '3',
+      title: 'Title3',
+    },
+  ],
+  proceeding: [
+    {
+      id: '4',
+      title: 'Title4',
+    },
+    {
+      id: '5',
+      title: 'Title5',
+    },
+  ],
+  complete: [
+    {
+      id: '6',
+      title: 'Title6',
+    },
+    {
+      id: '7',
+      title: 'Title7',
+    },
+    {
+      id: '8',
+      title: 'Title8',
+    },
+  ],
+};
+
+const DATE_FOLER_ITEM = [
+  {
+    id: 1,
+    date: '2024.03.01',
+  },
+  {
+    id: 2,
+    date: '2024.03.02',
+  },
+  {
+    id: 3,
+    date: '2024.03.03',
+  },
+  {
+    id: 4,
+    date: '2024.03.04',
+  },
+  {
+    id: 5,
+    date: '2024.03.05',
+  },
+  {
+    id: 6,
+    date: '2024.03.06',
+  },
+];
+
+const MEMO_ITEM = [
+  {
+    id: 1,
+    title: 'memo1',
+    content: '블라블라메모메모메모메모메모메모.................메모!!!~~~~~~',
+  },
+  {
+    id: 2,
+    title: 'memo2',
+    content: '블라블라메모메모메모메모메모메모.................메모!!!~~~~~~',
+  },
+  {
+    id: 3,
+    title: 'memo3',
+    content: '블라블라메모메모메모메모메모메모.................메모!!!~~~~~~',
+  },
+  {
+    id: 4,
+    title: 'memo4',
+    content: '블라블라메모메모메모메모메모메모.................메모!!!~~~~~~',
+  },
+  {
+    id: 4,
+    title: 'memo4',
+    content: '블라블라메모메모메모메모메모메모.................메모!!!~~~~~~',
+  },
+];
+
 function Home() {
   const navigate = useNavigate();
   const [goal, setGoal] = useState('');
@@ -40,46 +144,7 @@ function Home() {
   };
 
   // 임시 데이터
-  const [items, setItems] = useState({
-    ready: [
-      {
-        id: '1',
-        title: 'Title1',
-      },
-      {
-        id: '2',
-        title: 'Title2',
-      },
-      {
-        id: '3',
-        title: 'Title3',
-      },
-    ],
-    proceeding: [
-      {
-        id: '4',
-        title: 'Title4',
-      },
-      {
-        id: '5',
-        title: 'Title5',
-      },
-    ],
-    complete: [
-      {
-        id: '6',
-        title: 'Title6',
-      },
-      {
-        id: '7',
-        title: 'Title7',
-      },
-      {
-        id: '8',
-        title: 'Title8',
-      },
-    ],
-  });
+  const [items, setItems] = useState(CARD_ITEM);
 
   const onDragEnd = ({ source, destination }) => {
     if (!destination) return;
@@ -95,13 +160,6 @@ function Home() {
 
   const [enabled, setEnabled] = useState(false);
 
-  const setting = {
-    dots: true,
-    infinite: true,
-    slideToShow: 1,
-    slideToScroll: 1,
-    draggable: true,
-  };
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
@@ -114,6 +172,7 @@ function Home() {
   if (!enabled) {
     return null;
   }
+
   return (
     <HomeLayout>
       <LayoutLeft>
@@ -124,7 +183,7 @@ function Home() {
         </LayoutBtnContainer>
         <div id="userName">전수빈님</div>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <Slider {...setting}>
+        <Slider {...SLIDER_SETTING}>
           <DeadLineAlarm>
             <div id="deadlineTitle">마감 1일전!!</div>
             <div id="deadlineContent">정책분석 평가 과제 제출</div>
@@ -136,34 +195,14 @@ function Home() {
         </Slider>
         {/* map으로 돌리기 */}
         <DateFolderContainer>
-          <DateFolder>
-            <img src={FolderImg} alt="folder" />
-            <div id="date">2023.03.13</div>
-          </DateFolder>
-          <DateFolder>
-            <img src={FolderImg} alt="folder" />
-            <div id="date">2023.03.13</div>
-          </DateFolder>
-          <DateFolder>
-            <img src={FolderImg} alt="folder" />
-            <div id="date">2023.03.13</div>
-          </DateFolder>
-          <DateFolder>
-            <img src={FolderImg} alt="folder" />
-            <div id="date">2023.03.13</div>
-          </DateFolder>
-          <DateFolder>
-            <img src={FolderImg} alt="folder" />
-            <div id="date">2023.03.13</div>
-          </DateFolder>
-          <DateFolder>
-            <img src={FolderImg} alt="folder" />
-            <div id="date">2023.03.13</div>
-          </DateFolder>
-          <DateFolder>
-            <img src={FolderImg} alt="folder" />
-            <div id="date">2023.03.13</div>
-          </DateFolder>
+          {DATE_FOLER_ITEM.map((item) => {
+            return (
+              <DateFolder key={item.id}>
+                <img src={FolderImg} alt="folder" />
+                <div id="date">{item.date}</div>
+              </DateFolder>
+            );
+          })}
         </DateFolderContainer>
         <img
           role="presentation"
@@ -259,9 +298,11 @@ function Home() {
           </CardContainer>
         </DragDropContext>
         <MemoContainer>
-          <Memo />
-          <Memo />
-          <Memo />
+          {MEMO_ITEM.map((item) => {
+            return (
+              <Memo key={item.id} title={item.title} content={item.content} />
+            );
+          })}
           <MemoPlus />
         </MemoContainer>
       </LayoutRight>
@@ -278,7 +319,9 @@ export function MemoPlus() {
   };
   return (
     <MemoLayout state="plus" onClick={handleMemoModal}>
-      <img src={PlusImg} alt="plus" />
+      <div className="plusMemoBox">
+        <img src={PlusImg} alt="plus" />
+      </div>
     </MemoLayout>
   );
 }
