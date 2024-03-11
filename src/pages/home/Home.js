@@ -37,6 +37,7 @@ const SLIDER_SETTING = {
   slideToShow: 1,
   slideToScroll: 1,
   draggable: true,
+  arrows: false,
 };
 
 const CARD_ITEM = {
@@ -107,7 +108,7 @@ const DATE_FOLER_ITEM = [
   },
 ];
 
-const MEMO_ITEM = [
+export const MEMO_ITEM = [
   {
     id: 1,
     title: 'memo1',

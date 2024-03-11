@@ -80,7 +80,7 @@ export const LayoutBtn = styled.div`
   margin-right: 1.4rem;
   cursor: pointer;
 `;
-export const DefaultBtn = styled.div`
+export const DefaultBtn = styled.button`
   width: 11.6rem;
   height: 5.6rem;
   background: #ffd737;

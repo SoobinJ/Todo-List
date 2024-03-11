@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import moment from 'moment';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
 import Memo from '../../components/home/Memo';
 import {
   DefaultBtn,
@@ -17,30 +19,22 @@ import {
   TopContainer,
 } from './AddToDoStyledComponents';
 import { LayoutLeft, LayoutRight } from './HomeStyledComponents';
+import { MEMO_ITEM } from './Home';
 
 function AddToDo() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const navigate = useNavigate();
   const dispath = useDispatch();
-
-  useEffect(() => {
-    const saveBtn = document.getElementById('saveBtn');
-    if (title === '' || content === '') {
-      saveBtn.style.background = 'rgba(255, 215, 55, 0.6)';
-      saveBtn.style.color = 'rgba(0, 0, 0, 0.6)';
-    } else {
-      saveBtn.style.background = 'rgba(255, 215, 55)';
-      saveBtn.style.color = 'rgba(0, 0, 0)';
-    }
-  }, [title, content]);
+  const navigate = useNavigate();
 
   const handleHome = () => {
     navigate('/');
   };
+
   const handleDeadLineSettingModal = () => {
     dispath(deadLineSettingOnAction());
   };
+
   return (
     <AddToDoLayout>
       <LayoutLeft>
@@ -51,18 +45,22 @@ function AddToDo() {
         </LayoutBtnContainer>
         <div id="userName">전수빈님</div>
         <MiniMemoContainer>
-          <Memo />
-          <Memo />
-          <Memo />
-          <Memo />
+          {MEMO_ITEM.map((item) => {
+            return (
+              <Memo key={item.id} title={item.title} content={item.content} />
+            );
+          })}
         </MiniMemoContainer>
       </LayoutLeft>
       <LayoutRight>
         <TopContainer>
-          <div id="date">2021.03.21</div>
-          <DefaultBtn id="saveBtn" onClick={handleDeadLineSettingModal}>
+          <div id="date">{moment().format('YYYY.MM.DD')}</div>
+          <SaveBtn
+            onClick={handleDeadLineSettingModal}
+            disabled={title === '' || content === ''}
+          >
             저장하기
-          </DefaultBtn>
+          </SaveBtn>
         </TopContainer>
         <ContentContainer>
           <TitleInputContainer>
@@ -90,3 +88,13 @@ function AddToDo() {
 }
 
 export default AddToDo;
+
+const SaveBtn = styled(DefaultBtn)`
+  background-color: rgba(255, 215, 55);
+  color: #000;
+
+  &:disabled {
+    background: rgba(255, 215, 55, 0.6);
+    color: rgba(0, 0, 0, 0.6);
+  }
+`;

@@ -9,7 +9,10 @@ export const AddToDoLayout = styled.div`
 export const MiniMemoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 7.7rem 0 0 3.8rem;
+  margin-top: 7.7rem;
+  height: 100%;
+  overflow-y: scroll;
+
   ${MemoLayout} {
     margin-bottom: 2rem;
   }

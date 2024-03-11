@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { LayoutBtnContainer } from '../../components/styled';
 
 export const HomeLayout = styled.div`
   display: flex;
@@ -12,15 +13,26 @@ export const LayoutLeft = styled.div`
   border-radius: 33px 0px 0px 33px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 3.6rem;
+
+  ${LayoutBtnContainer} {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .slick-slider {
+    margin: 0;
+  }
+
   #userName {
     font-family: Cabin-Bold; //확인필요!
     font-weight: 700;
     font-size: 3.5rem;
-    margin-left: 3.5rem;
   }
   #setting {
     width: 3.5rem;
-    margin-left: 3.5rem;
     margin-top: 7rem;
     cursor: pointer;
   }
@@ -47,7 +59,6 @@ export const DateFolderContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 6.7rem;
-  margin-left: 3.5rem;
   height: 42rem;
 `;
 export const DateFolder = styled.div`
